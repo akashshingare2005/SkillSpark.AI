@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import axios from "axios";
 import './index.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import App from './App.jsx';
@@ -8,6 +9,11 @@ import SignUp from './Components/SignUp.jsx';
 import Analyze from './Components/Analyze.jsx';
 import Profile from './Components/Profile.jsx';
 import SignIn from './Components/SignIn.jsx';
+
+
+axios.defaults.baseURL = import.meta.env.DEV
+  ? ""
+  : import.meta.env.VITE_API_URL;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

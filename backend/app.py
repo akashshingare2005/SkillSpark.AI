@@ -373,7 +373,7 @@ def compare_skills(resume_text, job_text):
                 }
             ],
             # model="llama3-70b-8192",
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             temperature=0.1,
             max_tokens=1000
         )
