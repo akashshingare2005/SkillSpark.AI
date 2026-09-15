@@ -20,23 +20,26 @@ function App() {
   };
 
   return (
-    <div className='h-screen overflow-hidden flex flex-col'>
-      <NavBar></NavBar>
-      <div className="h-screen bg-gradient-to-r from-blue-800 via-violet-800 to-black flex items-center justify-center overflow-hidden">
-        <div className="text-white text-center max-w-screen-lg mx-auto px-4">
-          <h2 className="text-8xl font-sans font-extrabold text-yellow-500">Welcome to SkillSpark.AI</h2>
-          <br />
-          <StyleHeader />
-          <br />
-          <button 
-            className="py-3 px-8 bg-white text-violet-800 rounded-lg font-semibold shadow-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            onClick={handleGetStarted}
-          >
-            Get Started
-          </button>
+    <div className='min-h-screen flex flex-col overflow-x-hidden'>
+      <NavBar />
+      <main className="flex-1 bg-gradient-to-r from-blue-800 via-violet-800 to-black flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+        <div className="w-full max-w-5xl text-center text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-sans font-extrabold text-yellow-500 leading-tight tracking-tight">
+            Welcome to SkillSpark.AI
+          </h2>
+          <div className="mt-5 sm:mt-7">
+            <StyleHeader />
+          </div>
+          <div className="mt-6 sm:mt-8">
+            <button
+              className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-violet-800 shadow-lg transition hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 sm:px-8 sm:text-base"
+              onClick={handleGetStarted}
+            >
+              Get Started
+            </button>
+          </div>
         </div>
-      </div>
-      {/* ADD CHATBOT COMPONENT */}
+      </main>
       <Chatbot />
     </div>
   );

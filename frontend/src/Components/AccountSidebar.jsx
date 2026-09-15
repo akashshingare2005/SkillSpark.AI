@@ -91,39 +91,38 @@ function AccountSidebar({ isOpen, onClose }) {
     <>
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 z-40 bg-black bg-opacity-50"
           onClick={handleOverlayClick}
         ></div>
       )}
-      <div className={`fixed left-0 top-0 h-full w-2/5 bg-gradient-to-br from-black to-violet-900 backdrop-filter backdrop-blur-lg shadow-lg overflow-y-auto text-white transition-all duration-300 ease-in-out z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed left-0 top-0 z-50 h-full w-full max-w-sm overflow-y-auto bg-gradient-to-br from-black to-violet-900 text-white shadow-lg backdrop-blur-lg transition-all duration-300 ease-in-out sm:max-w-md md:w-2/5 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className={`absolute inset-0 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="p-8">
-            {/* Profile Box */}
-            <div className="bg-black bg-opacity-50 rounded-3xl p-10 shadow-2xl transform hover:scale-105 transition-all duration-300 border border-yellow-500/30 hover:border-yellow-500 backdrop-blur-sm">
-              <div className="relative w-48 h-48 mx-auto mb-8">
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-indigo-100 via-violet-500 to-blue-700 flex items-center justify-center shadow-lg overflow-hidden">
+          <div className="p-4 sm:p-6 md:p-8">
+            <div className="rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:border-yellow-500">
+              <div className="relative mx-auto mb-6 h-32 w-32 sm:h-36 sm:w-36 lg:h-48 lg:w-48">
+                <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-100 via-violet-500 to-blue-700 shadow-lg">
                   <div className="absolute inset-0 bg-black opacity-10"></div>
-                  <span className="text-7xl font-extrabold text-white relative z-10 font-sans tracking-wider">
+                  <span className="relative z-10 font-sans text-5xl font-extrabold tracking-wider text-white sm:text-6xl">
                     {userData.name.charAt(0).toUpperCase()}
                   </span>
                 </div>
-                <div className="absolute -bottom-3 -right-3 bg-yellow-400 rounded-full p-3 shadow-lg transform rotate-12 transition-transform duration-300 hover:rotate-0">
-                  <FaCode className="text-black" size={24} />
+                <div className="absolute -bottom-3 -right-3 rounded-full bg-yellow-400 p-3 shadow-lg transition-transform duration-300 hover:rotate-0">
+                  <FaCode className="text-black" size={20} />
                 </div>
-                <div className="absolute top-0 left-0 w-full h-full border-4 border-yellow-300 rounded-full opacity-50 animate-pulse"></div>
+                <div className="absolute left-0 top-0 h-full w-full rounded-full border-4 border-yellow-300 opacity-50 animate-pulse"></div>
               </div>
             </div>
-            <div className="space-y-4 mt-8">
+            <div className="mt-6 space-y-4">
               {['name', 'email', 'password'].map((field, index) => (
-                <div key={field} className={`bg-white/20 rounded-lg p-3 flex items-center justify-between backdrop-filter backdrop-blur-sm transition-all duration-300 ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`} style={{transitionDelay: `${(index + 1) * 100}ms`}}>
+                <div key={field} className={`flex items-center justify-between rounded-lg bg-white/20 p-3 backdrop-blur-sm transition-all duration-300 ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`} style={{transitionDelay: `${(index + 1) * 100}ms`}}>
                   <div className="flex-grow">
-                    <label className="block text-xs font-medium text-gray-200 mb-1">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                    <label className="mb-1 block text-xs font-medium text-gray-200">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
                     {editingField === field ? (
                       <input
                         type={field === 'password' ? 'password' : 'text'}
                         value={newValue}
                         onChange={(e) => setNewValue(e.target.value)}
-                        className="bg-transparent border-b border-gray-300 text-white text-sm focus:outline-none focus:border-yellow-400 w-full"
+                        className="w-full border-b border-gray-300 bg-transparent text-sm text-white focus:border-yellow-400 focus:outline-none"
                       />
                     ) : (
                       <p className="text-sm">
@@ -134,13 +133,13 @@ function AccountSidebar({ isOpen, onClose }) {
                   {field !== 'email' && (
                     <>
                       {editingField === field ? (
-                        <button onClick={handleSave} className="text-yellow-400 hover:text-yellow-300 ml-2 transition-colors duration-200">
+                        <button onClick={handleSave} className="ml-2 text-yellow-400 transition-colors duration-200 hover:text-yellow-300">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         </button>
                       ) : (
-                        <button onClick={() => handleEdit(field)} className="text-yellow-400 hover:text-yellow-300 ml-2 transition-colors duration-200">
+                        <button onClick={() => handleEdit(field)} className="ml-2 text-yellow-400 transition-colors duration-200 hover:text-yellow-300">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                           </svg>
@@ -151,7 +150,7 @@ function AccountSidebar({ isOpen, onClose }) {
                 </div>
               ))}
               <div className={`pt-6 transition-all duration-300 ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{transitionDelay: '400ms'}}>
-                <button onClick={handleSignOut} className="w-full bg-yellow-500 text-white py-3 px-6 rounded-lg hover:from-red-600/90 hover:to-pink-600/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-lg font-semibold transition-all duration-200 transform hover:scale-105">
+                <button onClick={handleSignOut} className="w-full rounded-lg bg-yellow-500 px-6 py-3 text-lg font-semibold text-white transition-all duration-200 hover:scale-105 hover:from-red-600/90 hover:to-pink-600/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
                   Sign Out
                 </button>
               </div>
@@ -160,15 +159,15 @@ function AccountSidebar({ isOpen, onClose }) {
         </div>
       </div>
       {showPrompt && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-gradient-to-br from-black to-violet-900 p-6 rounded-lg shadow-lg max-w-sm w-full text-white">
-            <h2 className="text-xl font-bold mb-4">Confirm Change</h2>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="w-full max-w-sm rounded-lg bg-gradient-to-br from-black to-violet-900 p-6 text-white shadow-lg">
+            <h2 className="mb-4 text-xl font-bold">Confirm Change</h2>
             <p className="mb-6">Are you sure you want to change your {promptField}?</p>
             <div className="flex justify-end space-x-4">
-              <button onClick={handleCancel} className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors duration-200">
+              <button onClick={handleCancel} className="rounded bg-gray-600 px-4 py-2 text-white transition-colors duration-200 hover:bg-gray-700">
                 Cancel
               </button>
-              <button onClick={handleConfirm} className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors duration-200">
+              <button onClick={handleConfirm} className="rounded bg-yellow-500 px-4 py-2 text-white transition-colors duration-200 hover:bg-yellow-600">
                 Confirm
               </button>
             </div>

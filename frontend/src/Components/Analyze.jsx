@@ -277,60 +277,57 @@
     return (
       <div className='min-h-screen flex flex-col bg-gradient-to-r from-blue-900 via-violet-900 to-black'>
         <NavBar />
-        <div className="flex-grow p-8 overflow-y-auto">
-          <div className="max-w-6xl mx-auto">
-            {/* File Upload Form */}
-            <div className="mb-8 bg-black bg-opacity-50 p-8 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">
-              <h2 className="text-5xl font-bold text-yellow-400 text-center mb-4 font-sans">Skill Analyzer</h2>
+        <div className="flex-grow overflow-y-auto p-4 sm:p-6 lg:p-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-8 rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-6 lg:p-8">
+              <h2 className="mb-4 text-center font-sans text-3xl font-bold text-yellow-400 sm:text-4xl lg:text-5xl">Skill Analyzer</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="resume" className="block text-yellow-400 mb-2">Upload Resume</label>
-                  <input type="file" id="resume" onChange={handleResumeChange} className="w-full p-2 rounded bg-gray-800 text-white" />
+                  <label htmlFor="resume" className="mb-2 block text-sm font-medium text-yellow-400 sm:text-base">Upload Resume</label>
+                  <input type="file" id="resume" onChange={handleResumeChange} className="w-full rounded bg-gray-800 p-2.5 text-sm text-white sm:text-base" />
                 </div>
                 <div>
-                  <label htmlFor="jobDescription" className="block text-yellow-400 mb-2">Upload Job Description</label>
-                  <input type="file" id="jobDescription" onChange={handleJobDescriptionChange} className="w-full p-2 rounded bg-gray-800 text-white" />
+                  <label htmlFor="jobDescription" className="mb-2 block text-sm font-medium text-yellow-400 sm:text-base">Upload Job Description</label>
+                  <input type="file" id="jobDescription" onChange={handleJobDescriptionChange} className="w-full rounded bg-gray-800 p-2.5 text-sm text-white sm:text-base" />
                 </div>
-                <button type="submit" className="w-full bg-yellow-400 text-black font-bold py-2 px-4 rounded hover:bg-yellow-500 transition-colors">
+                <button type="submit" className="w-full rounded bg-yellow-400 px-4 py-3 text-sm font-bold text-black transition-colors hover:bg-yellow-500 sm:text-base">
                   {isLoading ? 'Analyzing...' : 'Analyze Skills'}
                 </button>
               </form>
             </div>
 
-            {/* Analysis Dashboard */}
             {analysisResult && (
-              <div className="mb-8 bg-black bg-opacity-50 p-8 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">
-                <h2 className="text-5xl font-bold text-yellow-400 text-center mb-4 font-sans">Analysis Dashboard</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                  <div className="text-center bg-gray-800 p-6 rounded-xl transform hover:scale-105 transition-all duration-300">
-                    <div className="text-6xl font-bold text-white mb-2">{matchRate}%</div>
-                    <div className="text-yellow-400">Match Rate</div>
+              <div className="mb-8 rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-6 lg:p-8">
+                <h2 className="mb-4 text-center font-sans text-3xl font-bold text-yellow-400 sm:text-4xl lg:text-5xl">Analysis Dashboard</h2>
+                <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  <div className="rounded-xl bg-gray-800 p-4 text-center transition-all duration-300 hover:scale-[1.01] sm:p-6">
+                    <div className="mb-2 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">{matchRate}%</div>
+                    <div className="text-sm text-yellow-400 sm:text-base">Match Rate</div>
                   </div>
-                  <div className="text-center bg-gray-800 p-6 rounded-xl transform hover:scale-105 transition-all duration-300">
-                    <div className="text-6xl font-bold text-white mb-2">{skillsToImprove}</div>
-                    <div className="text-yellow-400">Skills to Improve</div>
+                  <div className="rounded-xl bg-gray-800 p-4 text-center transition-all duration-300 hover:scale-[1.01] sm:p-6">
+                    <div className="mb-2 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">{skillsToImprove}</div>
+                    <div className="text-sm text-yellow-400 sm:text-base">Skills to Improve</div>
                   </div>
-                  <div className="text-center bg-gray-800 p-6 rounded-xl transform hover:scale-105 transition-all duration-300">
-                    <div className="text-6xl font-bold text-white mb-2">{marketFit}%</div>
-                    <div className="text-yellow-400">Market Fit</div>
+                  <div className="rounded-xl bg-gray-800 p-4 text-center transition-all duration-300 hover:scale-[1.01] sm:p-6">
+                    <div className="mb-2 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">{marketFit}%</div>
+                    <div className="text-sm text-yellow-400 sm:text-base">Market Fit</div>
                   </div>
                 </div>
-                
-                {/* Skills Overview */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-gray-800 p-6 rounded-xl">
-                    <h3 className="text-2xl font-semibold text-yellow-400 mb-4">Your Skills</h3>
-                    <ul className="list-disc list-inside">
+
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <div className="rounded-xl bg-gray-800 p-4 sm:p-6">
+                    <h3 className="mb-4 text-xl font-semibold text-yellow-400 sm:text-2xl">Your Skills</h3>
+                    <ul className="list-inside list-disc space-y-2 text-sm text-white sm:text-base">
                       {analysisResult.skills_from_resume.map((skill, index) => (
-                        <li key={index} className="text-white mb-2">{skill}</li>
+                        <li key={index}>{skill}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-gray-800 p-6 rounded-xl">
-                    <h3 className="text-2xl font-semibold text-yellow-400 mb-4">Required Skills</h3>
-                    <ul className="list-disc list-inside">
+                  <div className="rounded-xl bg-gray-800 p-4 sm:p-6">
+                    <h3 className="mb-4 text-xl font-semibold text-yellow-400 sm:text-2xl">Required Skills</h3>
+                    <ul className="list-inside list-disc space-y-2 text-sm text-white sm:text-base">
                       {analysisResult.skills_required_in_job.map((skill, index) => (
-                        <li key={index} className="text-white mb-2">{skill}</li>
+                        <li key={index}>{skill}</li>
                       ))}
                     </ul>
                   </div>
@@ -338,46 +335,42 @@
               </div>
             )}
 
-            <div className="md:flex space-x-8">
-              <div className="md:w-2/3">
-                {/* Skills Assessment Visualization */}
+            <div className="flex flex-col gap-8 lg:flex-row lg:space-x-8">
+              <div className="w-full lg:w-2/3">
                 {analysisResult && <SkillsVisualization analysisResult={analysisResult} />}
-                {/* Recommended Improvements */}
-                <div className="mb-8 bg-black bg-opacity-50 p-8 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">
-                  <h3 className="text-3xl font-semibold text-yellow-400 mb-4 font-sans">Recommended Improvements</h3>
-                  <div className="mb-6 grid grid-cols-1 gap-4">
+
+                <div className="mb-8 rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-6 lg:p-8">
+                  <h3 className="mb-4 font-sans text-2xl font-semibold text-yellow-400 sm:text-3xl">Recommended Improvements</h3>
+                  <div className="mb-6 grid grid-cols-1 gap-3 sm:gap-4">
                     {skills.map((skill) => (
                       <div 
                         key={skill.id}
-                        className={`p-4 rounded-xl flex items-center justify-between transition-all duration-300 transform hover:scale-105 
-                          ${highlightedSkill === skill.name 
-                            ? 'bg-yellow-400 shadow-[0_0_20px_rgba(251,191,36,0.7)]' 
-                            : 'bg-gray-800'}`}
+                        className={`flex flex-col gap-3 rounded-xl p-3 transition-all duration-300 hover:scale-[1.01] sm:flex-row sm:items-center sm:justify-between sm:p-4 ${highlightedSkill === skill.name ? 'bg-yellow-400 shadow-[0_0_20px_rgba(251,191,36,0.7)]' : 'bg-gray-800'}`}
                       >
-                        <span className={`font-sans text-lg ${highlightedSkill === skill.name ? 'text-black' : 'text-gray-300'}`}>
+                        <span className={`font-sans text-base sm:text-lg ${highlightedSkill === skill.name ? 'text-black' : 'text-gray-300'}`}>
                           {skill.name}
                         </span>
                         <button 
-  onClick={(e) => sendSkillToBackend(e, skill.name)}
-  className={`inline-block ${skill.completed ? 'bg-gray-600' : 'bg-blue-500 hover:bg-blue-600'} text-white text-sm font-bold py-2 px-4 rounded transition-colors duration-300 cursor-pointer`}
-  disabled={loadingSkills[skill.name]}
->
-  {loadingSkills[skill.name] ? (
-    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
-  ) : 'Get Course'}
-</button>
+                          onClick={(e) => sendSkillToBackend(e, skill.name)}
+                          className={`inline-flex w-full items-center justify-center rounded px-4 py-2 text-sm font-bold text-white transition-colors duration-300 sm:w-auto ${skill.completed ? 'bg-gray-600' : 'bg-blue-500 hover:bg-blue-600'}`}
+                          disabled={loadingSkills[skill.name]}
+                        >
+                          {loadingSkills[skill.name] ? (
+                            <svg className="h-5 w-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                          ) : 'Get Course'}
+                        </button>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
-              {/* Skills Checklist and Estimated Study Time */}
-              <div className="md:w-1/3">
-                <div className="mb-8 bg-black bg-opacity-50 p-6 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">
-                  <h3 className="text-2xl font-semibold text-yellow-400 mb-3 font-sans">Skills to Improve</h3>
+
+              <div className="w-full lg:w-1/3">
+                <div className="mb-8 rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-6">
+                  <h3 className="mb-3 font-sans text-2xl font-semibold text-yellow-400">Skills to Improve</h3>
                   <div className="max-h-60 overflow-y-auto">
                     {skills.map((skill) => (
                       <SkillCheckbox 
@@ -390,25 +383,24 @@
                   </div>
                 </div>
 
-                {/* Estimated Study Time */}
-                <div className="mb-8 bg-black bg-opacity-50 p-6 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">
-                  <h3 className="text-2xl font-semibold text-yellow-400 mb-3 font-sans">Estimated Study Time</h3>
-                  <p className="text-white text-lg">
-                    Total time to master all skills: 
+                <div className="mb-8 rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-6">
+                  <h3 className="mb-3 font-sans text-2xl font-semibold text-yellow-400">Estimated Study Time</h3>
+                  <p className="text-base text-white sm:text-lg">
+                    Total time to master all skills:
                   </p>
-                  <p className="text-yellow-400 text-3xl font-bold mt-2">
+                  <p className="mt-2 text-2xl font-bold text-yellow-400 sm:text-3xl">
                     ~{skills.length * 10} hours
                   </p>
-                  <p className="text-gray-400 text-sm mt-2">
+                  <p className="mt-2 text-xs text-gray-400 sm:text-sm">
                     (Assuming an average of 10 hours per skill)
                   </p>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
           <Chatbot />
         </div>
+      </div>
     );
   }
 

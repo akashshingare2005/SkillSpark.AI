@@ -168,30 +168,28 @@ const saveTagline = async () => {
   return (
     <div className='min-h-screen flex flex-col bg-gradient-to-r from-blue-900 via-violet-900 to-black'>
       <NavBar className="sticky top-0 z-50" />
-      <div className="flex-grow flex flex-col lg:flex-row mt-16 px-4 lg:px-12 gap-8">
-        {/* Profile and Skills section */}
-        <div className="w-full lg:w-1/2 space-y-8">
-          {/* Profile Box */}
-          <div className="bg-black bg-opacity-50 rounded-3xl p-10 shadow-2xl transform hover:scale-105 transition-all duration-300 border border-yellow-500/30 hover:border-yellow-500 backdrop-blur-sm">
+      <div className="mt-8 flex flex-grow flex-col gap-8 px-4 sm:px-6 lg:mt-16 lg:flex-row lg:px-12">
+        <div className="w-full space-y-8 lg:w-1/2">
+          <div className="rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:border-yellow-500 sm:p-8 lg:p-10">
             <button 
               onClick={handleEdit}
-              className="absolute top-4 left-4 bg-yellow-400 p-2 rounded-full hover:bg-yellow-500 transition-all duration-300 transform hover:scale-110 shadow-lg"
+              className="absolute left-4 top-4 rounded-full bg-yellow-400 p-2 shadow-lg transition-all duration-300 hover:scale-110 hover:bg-yellow-500"
             >
               <FaEdit className="text-black" size={20} />
             </button>
-            <div className="relative w-48 h-48 mx-auto mb-8">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-indigo-100 via-violet-500 to-blue-700 flex items-center justify-center shadow-lg overflow-hidden">
+            <div className="relative mx-auto mb-6 h-32 w-32 sm:mb-8 sm:h-40 sm:w-40 lg:h-48 lg:w-48">
+              <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-100 via-violet-500 to-blue-700 shadow-lg">
                 <div className="absolute inset-0 bg-black opacity-10"></div>
-                <span className="text-7xl font-extrabold text-white relative z-10 font-sans tracking-wider">
+                <span className="relative z-10 font-sans text-5xl font-extrabold tracking-wider text-white sm:text-6xl lg:text-7xl">
                   {userName.charAt(0).toUpperCase()}
                 </span>
               </div>
-              <div className="absolute -bottom-3 -right-3 bg-yellow-400 rounded-full p-3 shadow-lg transform rotate-12 transition-transform duration-300 hover:rotate-0">
-                <FaCode className="text-black" size={24} />
+              <div className="absolute -bottom-3 -right-3 rounded-full bg-yellow-400 p-3 shadow-lg transition-transform duration-300 hover:rotate-0 sm:p-3">
+                <FaCode className="text-black" size={20} />
               </div>
-              <div className="absolute top-0 left-0 w-full h-full border-4 border-yellow-300 rounded-full opacity-50 animate-pulse"></div>
+              <div className="absolute left-0 top-0 h-full w-full rounded-full border-4 border-yellow-300 opacity-50 animate-pulse"></div>
             </div> 
-            <h2 className="text-5xl font-bold text-yellow-400 text-center mb-3 font-sans">{userName}</h2>
+            <h2 className="mb-3 text-center font-sans text-3xl font-bold text-yellow-400 sm:text-4xl lg:text-5xl">{userName}</h2>
             {isEditing ? (
         <div className="space-y-2">
           <input
@@ -199,40 +197,40 @@ const saveTagline = async () => {
             value={position}
             onChange={(e) => setPosition(e.target.value)}
             onBlur={handleInputBlur}
-            className="w-full bg-transparent text-white text-center text-2xl py-1 px-2 rounded-lg font-sans border-b border-yellow-400 focus:outline-none focus:border-yellow-500"
+            className="w-full rounded-lg border-b border-yellow-400 bg-transparent px-2 py-1 text-center font-sans text-xl text-white focus:border-yellow-500 focus:outline-none sm:text-2xl"
           />
           <input
             type="text"
             value={tagline}
             onChange={(e) => setTagline(e.target.value)}
             onBlur={handleInputBlur}
-            className="w-full bg-transparent text-gray-300 text-center italic py-1 px-2 rounded-lg font-sans text-lg border-b border-yellow-400 focus:outline-none focus:border-yellow-500"
+            className="w-full rounded-lg border-b border-yellow-400 bg-transparent px-2 py-1 text-center font-sans text-base italic text-gray-300 focus:border-yellow-500 focus:outline-none sm:text-lg"
           />
         </div>
       ) : (
         <>
-          <p className="text-white text-center text-2xl mb-4 font-sans">{position}</p>
-          <p className="text-gray-300 text-center italic mb-8 font-sans text-lg">{tagline}</p>
+          <p className="mb-4 text-center font-sans text-xl text-white sm:text-2xl">{position}</p>
+          <p className="mb-6 text-center font-sans text-base italic text-gray-300 sm:mb-8 sm:text-lg">{tagline}</p>
         </>
       )}
-            <div className="flex justify-center space-x-6">
+            <div className="flex justify-center space-x-4 sm:space-x-6">
               {[FaGithub, FaLinkedin, FaTwitter, FaEnvelope].map((Icon, index) => (
-                <a key={index} href="#" className="bg-gray-800 p-4 rounded-full hover:bg-yellow-400 transition-all duration-300 transform hover:scale-110 shadow-lg">
-                  <Icon className="text-gray-300 hover:text-black" size={24} />
+                <a key={index} href="#" className="rounded-full bg-gray-800 p-3 shadow-lg transition-all duration-300 hover:scale-110 hover:bg-yellow-400 sm:p-4">
+                  <Icon className="text-gray-300 hover:text-black" size={20} />
                 </a>
               ))}
             </div>
           </div>
-            
-          {/* Skills List */}
-          <div className="bg-black bg-opacity-50 rounded-3xl p-10 shadow-2xl transform hover:scale-105 transition-all duration-300 border border-yellow-500/30 hover:border-yellow-500 backdrop-blur-sm">            <h3 className="text-4xl font-semibold text-yellow-400 mb-8 font-sans">Skills</h3>
-            <div className="grid grid-cols-2 gap-6">
+
+          <div className="rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:border-yellow-500 sm:p-8 lg:p-10">
+            <h3 className="mb-6 font-sans text-2xl font-semibold text-yellow-400 sm:text-3xl lg:text-4xl">Skills</h3>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
               {skills.map((skill, index) => (
                 <div 
                   key={index} 
-                  className="p-4 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:scale-110 bg-gray-800 hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(251,191,36,0.7)]"
+                  className="flex items-center justify-center rounded-xl bg-gray-800 p-4 transition-all duration-300 hover:scale-105 hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(251,191,36,0.7)]"
                 >
-                  <span className="font-sans text-lg text-gray-300 hover:text-black">
+                  <span className="font-sans text-base text-gray-300 hover:text-black sm:text-lg">
                     {skill.title}
                   </span>
                 </div>
@@ -241,7 +239,8 @@ const saveTagline = async () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-1/2 p-6 bg-black bg-opacity-50 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">          <h3 className="text-4xl font-semibold text-yellow-400 mb-8 font-sans text-center">Timeline</h3>
+        <div className="w-full rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-6 lg:w-1/2 lg:p-6">
+          <h3 className="mb-6 text-center font-sans text-2xl font-semibold text-yellow-400 sm:text-3xl lg:text-4xl">Timeline</h3>
           <VerticalTimeline layout="1-column" lineColor="rgba(251, 191, 36, 0.3)">
             {/* Add Skill Input */}
             <VerticalTimelineElement

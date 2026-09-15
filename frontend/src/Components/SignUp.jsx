@@ -41,37 +41,37 @@ function SignUp() {
     // }
 
     return (
-        <section className="bg-gray-50 dark:bg-gray-900">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 max-w-md">
-                <div className="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 bg-gradient-to-r from-blue-800 to-gray-400 dark:border-gray-700">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-black md:text-2xl dark:text-white">
+        <section className="min-h-screen bg-gray-50 dark:bg-gray-900">
+            <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-4 py-8 sm:px-6 lg:max-w-lg lg:px-8">
+                <div className="w-full rounded-lg bg-gradient-to-r from-blue-800 to-gray-400 shadow dark:border dark:border-gray-700 md:mt-0 xl:p-0">
+                    <div className="space-y-4 p-4 sm:p-8 md:space-y-6">
+                        <h1 className="text-xl font-bold leading-tight tracking-tight text-black dark:text-white md:text-2xl">
                             Create an account
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSignUp}>
                         <div>
-                                <label htmlFor="name" className="block mb-2 text-sm font-medium text-black dark:text-white">
+                                <label htmlFor="name" className="mb-2 block text-sm font-medium text-black dark:text-white">
                                     Name
                                 </label>
                                 <input
                                     name="name"
                                     id="name"
                                     placeholder='My name is...'
-                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-black focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     required
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-black dark:text-white">
+                                <label htmlFor="email" className="mb-2 block text-sm font-medium text-black dark:text-white">
                                     Your email
                                 </label>
                                 <input
                                     type="email"
                                     name="email"
                                     id="email"
-                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-black focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     placeholder="name@company.com"
                                     required
                                     value={email}
@@ -79,7 +79,7 @@ function SignUp() {
                                 />
                             </div>
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-black dark:text-white">
+                                <label htmlFor="password" className="mb-2 block text-sm font-medium text-black dark:text-white">
                                     Password
                                 </label>
                                 <input
@@ -87,14 +87,14 @@ function SignUp() {
                                     name="password"
                                     id="password"
                                     placeholder="••••••••"
-                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-black focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-black dark:text-white">
+                                <label htmlFor="confirm-password" className="mb-2 block text-sm font-medium text-black dark:text-white">
                                     Confirm Password
                                 </label>
                                 <input
@@ -102,16 +102,16 @@ function SignUp() {
                                     name="confirm-password"
                                     id="confirm-password"
                                     placeholder="••••••••"
-                                    className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-black focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                                     required
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
                             </div>
-                            {error && <p className="text-red-500 text-sm">{error}</p>}
+                            {error && <p className="text-sm text-red-500">{error}</p>}
                             <button
                                 type="submit"
-                                className="w-full text-black bg-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-800"
+                                className="w-full rounded-lg bg-white px-5 py-2.5 text-center text-sm font-medium text-black focus:outline-none focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-800"
                             >
                                 Create an account
                             </button>
