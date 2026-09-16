@@ -170,7 +170,7 @@ const saveTagline = async () => {
       <NavBar className="sticky top-0 z-50" />
       <div className="mt-8 flex flex-grow flex-col gap-8 px-4 sm:px-6 lg:mt-16 lg:flex-row lg:px-12">
         <div className="w-full space-y-8 lg:w-1/2">
-          <div className="rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:border-yellow-500 sm:p-8 lg:p-10">
+          <div className="relative rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-6 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-[1.01] hover:border-yellow-500 sm:p-8 lg:p-10">
             <button 
               onClick={handleEdit}
               className="absolute left-4 top-4 rounded-full bg-yellow-400 p-2 shadow-lg transition-all duration-300 hover:scale-110 hover:bg-yellow-500"

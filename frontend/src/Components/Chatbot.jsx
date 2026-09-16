@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 const Chatbot = () => {
@@ -104,7 +104,7 @@ const Chatbot = () => {
       {/* Chatbot Toggle Button */}
       <button
         onClick={toggleChatbot}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-yellow-400 hover:bg-yellow-500 text-black rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+        className="fixed bottom-4 right-4 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-yellow-400 text-black shadow-lg transition-all duration-300 hover:scale-110 hover:bg-yellow-500 sm:bottom-6 sm:right-6"
         aria-label="Open chatbot"
       >
         {isOpen ? (
@@ -120,12 +120,12 @@ const Chatbot = () => {
 
       {/* Chatbot Window */}
       {isOpen && (
-        <div className="fixed bottom-20 right-6 z-40 w-80 h-96 bg-gray-900 rounded-2xl shadow-2xl border border-yellow-500/30 flex flex-col">
+        <div className="fixed bottom-20 left-4 right-4 z-40 flex h-[min(32rem,calc(100vh-6rem))] flex-col rounded-2xl border border-yellow-500/30 bg-gray-900 shadow-2xl sm:left-auto sm:right-6 sm:w-80">
           {/* Header */}
           <div className="bg-yellow-400 text-black px-4 py-3 rounded-t-2xl flex justify-between items-center">
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-              <h3 className="font-bold">SkillSpark AI Assistant</h3>
+              <h3 className="min-w-0 truncate font-bold">SkillSpark AI Assistant</h3>
             </div>
             <div className="flex space-x-2">
               <button

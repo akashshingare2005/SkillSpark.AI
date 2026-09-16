@@ -115,7 +115,7 @@ function AccountSidebar({ isOpen, onClose }) {
             <div className="mt-6 space-y-4">
               {['name', 'email', 'password'].map((field, index) => (
                 <div key={field} className={`flex items-center justify-between rounded-lg bg-white/20 p-3 backdrop-blur-sm transition-all duration-300 ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`} style={{transitionDelay: `${(index + 1) * 100}ms`}}>
-                  <div className="flex-grow">
+                  <div className="min-w-0 flex-grow">
                     <label className="mb-1 block text-xs font-medium text-gray-200">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
                     {editingField === field ? (
                       <input
@@ -125,7 +125,7 @@ function AccountSidebar({ isOpen, onClose }) {
                         className="w-full border-b border-gray-300 bg-transparent text-sm text-white focus:border-yellow-400 focus:outline-none"
                       />
                     ) : (
-                      <p className="text-sm">
+                      <p className="break-words text-sm">
                         {field === 'password' ? '********' : userData[field]}
                       </p>
                     )}

@@ -109,13 +109,14 @@ export function SkillsVisualization({ analysisResult }) {
   const { skills_from_resume, skills_required_in_job, matching_skills, skills_to_improve } = analysisResult;
 
   return (
-    <div className="mb-8 bg-black bg-opacity-50 p-8 rounded-3xl shadow-2xl border border-yellow-500/30 backdrop-blur-sm">
-      <h3 className="text-3xl font-semibold text-yellow-400 mb-4 font-sans">Skills Visualization</h3>
-      <div className="w-full flex justify-center">
+    <div className="mb-8 rounded-3xl border border-yellow-500/30 bg-black bg-opacity-50 p-4 shadow-2xl backdrop-blur-sm sm:p-8">
+      <h3 className="mb-4 font-sans text-2xl font-semibold text-yellow-400 sm:text-3xl">Skills Visualization</h3>
+      <div className="flex w-full justify-center overflow-hidden">
         <svg 
-          width="450" 
-          height="450" 
+          width="450"
+          height="450"
           viewBox="0 0 400 400"
+          className="h-auto w-full max-w-[450px]"
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
@@ -166,7 +167,7 @@ export function SkillsVisualization({ analysisResult }) {
           <text x="200" y="210" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Overview</text>
         </svg>
       </div>
-      <div className="flex justify-center mt-6 space-x-6">
+      <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-3">
         {Object.entries(colorMap).map(([key, [color]]) => (
           <div key={key} className="flex items-center">
             <div className="w-4 h-4 rounded-full mr-2" style={{background: `linear-gradient(to right, ${color}, ${colorMap[key][1]})`}}></div>
