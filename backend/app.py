@@ -1591,98 +1591,70 @@ def recommend_course_api():
 
 # ==================== GEMINI CHATBOT ROUTE ====================
 
-
 @app.route('/api/chat', methods=['POST'])
 def chat_with_bot():
 
     try:
 
-        print(
-            "=== CHAT ENDPOINT CALLED ==="
-        )
+        print("=== CHAT ENDPOINT CALLED ===")
 
         data = request.get_json()
 
         if not data:
-
             return jsonify({
-                'response':
-                'Please send a message.',
-                'timestamp':
-                datetime.now().isoformat()
+                'response': 'Please send a message.',
+                'timestamp': datetime.now().isoformat()
             }), 400
 
-        user_message = (
-            data.get('message', '')
-            .strip()
-        )
+        user_message = data.get('message', '').strip()
+        history = data.get('history', [])
 
-        history = data.get(
-            'history',
-            []
-        )
-
-        print(
-            f"User message: {user_message}"
-        )
+        print(f"User message: {user_message}")
 
         if not user_message:
-
             return jsonify({
-                'response':
-                'Please type a message.',
-                'timestamp':
-                datetime.now().isoformat()
+                'response': 'Please type a message.',
+                'timestamp': datetime.now().isoformat()
             }), 400
 
         # Check Gemini
         if not gemini_client:
-
-            print(
-                "Gemini client not available"
-            )
+            print("Gemini client not available")
 
             return jsonify({
                 'response':
-                'Gemini AI is currently unavailable. '
-                'Please try again later.',
-                'timestamp':
-                datetime.now().isoformat()
+                    'Gemini AI is currently unavailable. '
+                    'Please try again later.',
+                'timestamp': datetime.now().isoformat()
             }), 503
 
         # ==================== BUILD CHAT HISTORY ====================
 
         conversation = []
 
-        # Only use latest 10 messages
         for message in history[-10:]:
 
             role = message.get('type')
 
-            content = (
-                message.get(
-                    'content',
-                    ''
-                )
-                .strip()
-            )
+            content = message.get(
+                'content',
+                ''
+            ).strip()
 
             if not content:
                 continue
 
             if role == 'user':
-
                 conversation.append(
                     f"User: {content}"
                 )
 
             elif role == 'bot':
-
                 conversation.append(
                     f"Assistant: {content}"
                 )
 
-        # Add latest message
+        # Add current message
         conversation.append(
             f"User: {user_message}"
         )
@@ -1697,10 +1669,10 @@ def chat_with_bot():
 You are SkillSpark AI Assistant,
 an AI career and learning assistant.
 
-Your job is to help students and job seekers with:
+Help students and job seekers with:
 
 - Skill gap analysis
-- Programming skills
+- Programming
 - Technical skills
 - Resume and CV improvement
 - Interview preparation
@@ -1722,19 +1694,18 @@ Your job is to help students and job seekers with:
 
 Give clear, practical and beginner-friendly answers.
 
-When explaining technical topics:
-- Keep explanations simple
-- Use examples when useful
+For technical questions:
+- Explain concepts simply
+- Give examples when useful
 - Give step-by-step guidance
 
-When giving career or learning advice:
-- Give structured steps
-- Mention useful technologies and skills
-- Keep the advice practical
+For career questions:
+- Give structured and practical advice
+- Mention useful skills and technologies
 
-Do not claim that you have analyzed a resume
-or job description unless that information was
-actually provided to you.
+Do not claim that you analyzed a resume
+or job description unless that information
+was actually provided.
 
 Be friendly and professional.
 
@@ -1742,64 +1713,123 @@ Conversation history:
 
 {conversation_text}
 
-Now respond naturally to the user's latest message.
+Respond naturally to the user's latest message.
 """
 
-        print(
-            "Sending request to Gemini API..."
-        )
+        # ==================== GEMINI REQUEST WITH RETRY ====================
 
-        # ==================== GEMINI REQUEST ====================
+        max_attempts = 3
 
-        response = (
-            gemini_client
-            .models
-            .generate_content(
+        for attempt in range(1, max_attempts + 1):
 
-                model="gemini-3.6-flash",
+            try:
 
-                contents=prompt
-            )
-        )
+                print(
+                    f"Sending request to Gemini API "
+                    f"(attempt {attempt}/{max_attempts})..."
+                )
 
-        bot_response = (
-            response.text.strip()
-            if response.text
-            else
-            "Sorry, I couldn't generate a response."
-        )
+                response = gemini_client.models.generate_content(
+                    model="gemini-3.6-flash",
+                    contents=prompt
+                )
 
-        print(
-            "Gemini response received"
-        )
+                bot_response = (
+                    response.text.strip()
+                    if response.text
+                    else
+                    "Sorry, I couldn't generate a response."
+                )
 
-        return jsonify({
+                print(
+                    "Gemini response received successfully"
+                )
 
-            'response':
-            bot_response,
+                return jsonify({
+                    'response': bot_response,
+                    'timestamp': datetime.now().isoformat()
+                }), 200
 
-            'timestamp':
-            datetime.now().isoformat()
+            except Exception as gemini_error:
 
-        }), 200
+                error_text = str(gemini_error)
+
+                print(
+                    f"Gemini attempt {attempt} failed:"
+                )
+
+                print(error_text)
+
+                # Retry only for temporary server problems
+                if (
+                    '503' in error_text
+                    or
+                    'UNAVAILABLE' in error_text
+                    or
+                    '429' in error_text
+                ):
+
+                    if attempt < max_attempts:
+
+                        import time
+
+                        wait_time = 2 ** attempt
+
+                        print(
+                            f"Temporary Gemini error. "
+                            f"Retrying in {wait_time} seconds..."
+                        )
+
+                        time.sleep(wait_time)
+
+                        continue
+
+                    else:
+
+                        print(
+                            "Gemini unavailable after "
+                            "all retry attempts."
+                        )
+
+                        return jsonify({
+                            'response':
+                                'Gemini AI is temporarily '
+                                'busy right now. '
+                                'Please try your message '
+                                'again in a few seconds.',
+                            'timestamp':
+                                datetime.now().isoformat()
+                        }), 503
+
+                # Don't retry authentication/configuration errors
+                else:
+
+                    print(
+                        "Non-retryable Gemini error."
+                    )
+
+                    return jsonify({
+                        'response':
+                            'There was a problem connecting '
+                            'to the AI service. '
+                            'Please try again later.',
+                        'timestamp':
+                            datetime.now().isoformat()
+                    }), 500
 
     except Exception as e:
 
         print(
-            f"Chat error: {e}"
+            f"Chat endpoint error: {e}"
         )
 
         return jsonify({
-
             'response':
-            "Sorry, I couldn't process your request "
-            "right now. Please try again.",
-
+                "Sorry, I couldn't process your "
+                "request right now. Please try again.",
             'timestamp':
-            datetime.now().isoformat()
-
+                datetime.now().isoformat()
         }), 500
-
 
 # ==================== HEALTH CHECK ====================
 
